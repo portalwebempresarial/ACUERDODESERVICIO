@@ -6,8 +6,35 @@
     <title>Acuerdo de Nivel de Servicio - Marketing Network C</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+      @media print {
+        @page { size: A4; margin: 12mm; }
+        html, body {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          background: #fff !important;
+        }
+        .no-print { display: none !important; }
+        .shadow-md { box-shadow: none !important; }
+        /* Mantener las 2 columnas también en el PDF */
+        .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+        .md\:col-span-2 { grid-column: span 2 / span 2 !important; }
+        /* Evitar que cajas y cláusulas se corten entre páginas */
+        .rounded-lg, .border-l-4, li, p { break-inside: avoid; page-break-inside: avoid; }
+        h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+        header { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+        main { padding-top: 1.5rem !important; }
+        section { margin-top: 1.5rem !important; }
+        a { text-decoration: none !important; }
+      }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Botón flotante: Guardar en PDF -->
+    <button onclick="descargarPDF()" class="no-print fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-3 rounded-full shadow-lg flex items-center gap-2">
+        <i class="fas fa-file-pdf"></i> Descargar PDF
+    </button>
 
     <!-- Header / Hero Section -->
     <header class="bg-blue-900 text-white py-16">
@@ -191,7 +218,7 @@
                 </div>
                 <div class="flex items-start p-3 bg-gray-50 rounded md:col-span-2">
                     <i class="fas fa-star text-blue-600 mt-1 mr-3"></i>
-                    <p><strong>Calificación Continua:</strong> Solicitamos calificación (1-10) del nivel de satisfaction en cada ciclo de campaña, así como la misma calificación (1-10) sobre nuestro trabajo de gestión y la elaboración y creatividad de los diseños.</p>
+                    <p><strong>Calificación Continua:</strong> Solicitamos calificación (1-10) del nivel de satisfacción en cada ciclo de campaña, así como la misma calificación (1-10) sobre nuestro trabajo de gestión y la elaboración y creatividad de los diseños.</p>
                 </div>
             </div>
         </section>
@@ -296,6 +323,15 @@
             <p class="mt-4">&copy; 2026 Marketing Network C. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script>
+      function descargarPDF() {
+        const tituloOriginal = document.title;
+        document.title = "Acuerdo-de-Servicio-Marketing-Network-C"; // nombre sugerido del archivo
+        window.print();
+        setTimeout(() => { document.title = tituloOriginal; }, 1000);
+      }
+    </script>
 
 </body>
 </html>
